@@ -4,7 +4,7 @@ import {Navbar, NavbarBrand} from "reactstrap";
 
 function App() {
     return (
-        //This classNames are defined in the App.css
+        //These classNames are defined in the App.css
         <div className="App">
             <Navbar dark color="primary">
                 <div className="container">
