@@ -1,63 +1,58 @@
 import React, {Component} from "react";
-import {Media} from "reactstrap";
+import {Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle} from "reactstrap";
 
+//Only class components can hava a local state
 class Menu extends Component {
 
+    //We declare the state of the component in the constructor
     constructor(props) {
         super(props);
 
         //Here we store properties of the component
         this.state = {
-            dishes: [
-                {
-                    id: 0,
-                    name:'Uthappizza',
-                    image: 'assets/images/uthappizza.png',
-                    category: 'mains',
-                    label:'Hot',
-                    price:'4.99',
-                    description:'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.'                        },
-                {
-                    id: 1,
-                    name:'Zucchipakoda',
-                    image: 'assets/images/zucchipakoda.png',
-                    category: 'appetizer',
-                    label:'',
-                    price:'1.99',
-                    description:'Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce'                        },
-                {
-                    id: 2,
-                    name:'Vadonut',
-                    image: 'assets/images/vadonut.png',
-                    category: 'appetizer',
-                    label:'New',
-                    price:'1.99',
-                    description:'A quintessential ConFusion experience, is it a vada or is it a donut?'                        },
-                {
-                    id: 3,
-                    name:'ElaiCheese Cake',
-                    image: 'assets/images/elaicheesecake.png',
-                    category: 'dessert',
-                    label:'',
-                    price:'2.99',
-                    description:'A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms'                        }
-            ],
-        };
+            selectedDish: null
+        }
     }
 
-    render() {
-        const menu = this.state.dishes.map((dish) => {
+    OnDishSelect(dish) {
+        //Here we set the selectedDish to the dish we just click using OnClick
+        this.setState({selectedDish: dish})
+    }
+
+    renderDish(dish) {
+        if (dish)
             return (
-                <div key={dish.id} className="col-12 mt-5">
-                    <Media tag="li">
-                        <Media left middle>
-                            <Media object src={dish.image} alt={dish.name} />
-                        </Media>
-                        <Media body className="ml-5">
-                            <Media heading>{dish.name}</Media>
-                            <p>{dish.description}</p>
-                        </Media>
-                    </Media>
+                <Card>
+                    <CardImg top src={dish.image} alt={dish.name}/>
+                    <CardBody>
+                        <CardTitle>{dish.name}</CardTitle>
+                        <CardText>{dish.description}</CardText>
+                    </CardBody>
+                </Card>
+            );
+        else
+            return (
+                <div></div>
+            );
+    }
+
+
+    render() {
+        // Here now we're using props to get the DISHES from App component
+        const menu = this.props.dishes.map((dish) => {
+            return (
+                //Using the map function, we convert the array into a list,
+                // this means that we MUST always have a KEY
+                <div key={dish.id} className="col-12 col-md-5 m-1">
+                    <Card onClick={() => this.OnDishSelect(dish)}>
+                        {/* You can't do this.state.dish.image = newImage;
+                            This one can only be modified using setState()
+                        */}
+                        <CardImg width="100%" src={dish.image} alt={dish.name}/>
+                        <CardImgOverlay>
+                            <CardTitle>{dish.name}</CardTitle>
+                        </CardImgOverlay>
+                    </Card>
                 </div>
             );
         });
@@ -65,9 +60,10 @@ class Menu extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <Media list>
-                        {menu}
-                    </Media>
+                    {menu}
+                </div>
+                <div className="row">
+                    {this.renderDish(this.state.selectedDish)}
                 </div>
             </div>
         );
