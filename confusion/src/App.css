@@ -36,3 +36,66 @@
     transform: rotate(360deg);
   }
 }
+
+.row-header {
+  margin: auto;
+  padding: 0;
+}
+
+
+.row-content {
+  margin:0px auto;
+  padding: 50px 0px 50px 0px;
+  border-bottom: 1px ridge;
+  min-height:400px;
+}
+
+.footer{
+  background-color: #D1C4E9;
+  margin:0px auto;
+  padding: 20px 0px 20px 0px;
+}
+
+address{
+  font-size:80%;
+  margin:0px;
+  color:#0f0f0f;
+}
+
+.navbar-dark {
+  background-color: #512DA8;
+}
+
+/* Adding Jumbotron manually since it's not longer available on Bootstrap 5 */
+
+.container-fluid .jumbotron, .container .jumbotron {
+  border-radius: 6px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media screen and (min-width: 768px)
+{
+  .container-fluid .jumbotron, .container .jumbotron {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
+
+@media screen and (min-width: 768px)
+{
+  .jumbotron {
+    padding-bottom: 48px;
+    padding-top: 48px;
+  }
+}
+
+.jumbotron {
+  padding:70px 30px 70px 30px;
+  margin:0px auto;
+  background: #9575CD ;
+  color:floralwhite;
+}
+
+
+

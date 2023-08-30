@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 //Adding bootstrap to our project, it's before index.css in case we want
 // to overide the behaivor of bootstrap components in our index.css
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'font-awesome/css/font-awesome.min.css';
+import 'bootstrap-social/bootstrap-social.css'
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
