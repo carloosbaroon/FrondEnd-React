@@ -7,6 +7,7 @@ import {Component} from "react";
 //This is a Container Component
 class Main extends Component {
 
+    //We declare the state of the component in the constructor
     constructor(props){
         super(props);
         //Here we store properties of the component

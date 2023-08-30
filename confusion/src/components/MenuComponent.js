@@ -5,11 +5,6 @@ import {Card, CardImg, CardImgOverlay, CardTitle} from "reactstrap";
 //Only class components can hava a local state
 class Menu extends Component {
 
-    //We declare the state of the component in the constructor
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         // Here now we're using props to get the DISHES from App component
         const menu = this.props.dishes.map((dish) => {
