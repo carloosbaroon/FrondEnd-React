@@ -8,7 +8,7 @@ import {Component} from "react";
 class Main extends Component {
 
     //We declare the state of the component in the constructor
-    constructor(props){
+    constructor(props) {
         super(props);
         //Here we store properties of the component
         //Lifting state of DISHES, so they can be shared between more components
@@ -21,7 +21,6 @@ class Main extends Component {
     OnDishSelect(dishId) {
         //Here we set the selectedDish to the dish we just click using OnClick
         this.setState({selectedDish: dishId})
-        console.log("Calling OnDishSelect")
     }
 
     render() {
