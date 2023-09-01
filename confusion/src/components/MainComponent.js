@@ -1,9 +1,11 @@
 import Menu from "./MenuComponent";
+import Home from "./HomeComponent";
 import DishDetail from "./DishDetailComponent";
 import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
 import {DISHES} from "../shared/dishes";
 import {Component} from "react";
+import {Routes, Route, Navigate} from "react-router-dom";
 
 //This is a Container Component
 class Main extends Component {
@@ -14,26 +16,39 @@ class Main extends Component {
         //Here we store properties of the component
         //Lifting state of DISHES, so they can be shared between more components
         this.state = {
-            dishes: DISHES,
-            selectedDish: null
+            dishes: DISHES
         };
     }
 
-    OnDishSelect(dishId) {
-        //Here we set the selectedDish to the dish we just click using OnClick
-        this.setState({selectedDish: dishId})
-    }
-
     render() {
+
+        //Creating functional component HomePage
+        const HomePage  = () => {
+            return(
+                <Home/>
+            );
+        }
+
         return (
             //These classNames are defined in the App.css
             <div className="App">
                 <Header/>
-                {/* Using props to pass the DISHES to MenuComponent
+                <Routes>
+                    <Route
+                        path="/home"
+                        element={<HomePage/>}
+                    />
+                    {/* Using props to pass the DISHES to MenuComponent
                     and passing the selected dish */}
-                <Menu dishes={this.state.dishes}
-                      onClick={(dishId) => this.OnDishSelect(dishId)}/>
-                <DishDetail selectedDish={this.state.dishes.filter((dish) => dish.id === this.state.selectedDish)[0]}/>
+                    <Route
+                        exact path="/menu"
+                        element={<Menu dishes={this.state.dishes}/>}
+                    />
+                    <Route
+                        path="*"
+                        element={<Navigate to="/home" replace />}
+                    />
+                </Routes>
                 <Footer/>
             </div>
 

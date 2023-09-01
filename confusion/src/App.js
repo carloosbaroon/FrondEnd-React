@@ -1,17 +1,18 @@
 import {Component} from "react";
 import Main from "./components/MainComponent";
 import './App.css';
+import {BrowserRouter} from "react-router-dom";
 
 class App extends Component {
 
     render() {
         return (
-            //These classNames are defined in the App.css
-            <div className="App">
-                {/* Using props to pass the DISHES to MenuComponent */}
-                <Main/>
-            </div>
-
+            <BrowserRouter>
+                {/* These classNames are defined in the App.css */}
+                <div className="App">
+                    <Main/>
+                </div>
+            </BrowserRouter>
         );
     }
 }
