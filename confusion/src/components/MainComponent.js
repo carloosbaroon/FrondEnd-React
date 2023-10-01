@@ -1,9 +1,13 @@
 import Menu from "./MenuComponent";
 import Home from "./HomeComponent";
+import Contact from "./ContactComponent";
 import DishDetail from "./DishDetailComponent";
 import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
 import {DISHES} from "../shared/dishes";
+import {COMMENTS} from "../shared/comments";
+import {LEADERS} from "../shared/leaders";
+import {PROMOTIONS} from "../shared/promotions";
 import {Component} from "react";
 import {Routes, Route, Navigate} from "react-router-dom";
 
@@ -16,7 +20,10 @@ class Main extends Component {
         //Here we store properties of the component
         //Lifting state of DISHES, so they can be shared between more components
         this.state = {
-            dishes: DISHES
+            dishes: DISHES,
+            comments: COMMENTS,
+            promotions: PROMOTIONS,
+            leaders: LEADERS
         };
     }
 
@@ -25,7 +32,11 @@ class Main extends Component {
         //Creating functional component HomePage
         const HomePage  = () => {
             return(
-                <Home/>
+                //Since we return an array (But only with that element), we take position [0]
+                <Home dish={this.state.dishes.filter((dish) => dish.featured)[0]}
+                      promotion={this.state.promotions.filter((promotion) => promotion.featured)[0]}
+                      leader={this.state.leaders.filter((leader) => leader.featured)[0]}
+                />
             );
         }
 
@@ -43,6 +54,10 @@ class Main extends Component {
                     <Route
                         exact path="/menu"
                         element={<Menu dishes={this.state.dishes}/>}
+                    />
+                    <Route
+                        exact path="/contactus"
+                        element={<Contact/>}
                     />
                     <Route
                         path="*"
