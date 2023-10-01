@@ -9,7 +9,8 @@ import {COMMENTS} from "../shared/comments";
 import {LEADERS} from "../shared/leaders";
 import {PROMOTIONS} from "../shared/promotions";
 import {Component} from "react";
-import {Routes, Route, Navigate} from "react-router-dom";
+import {Routes, Route, Navigate, useParams} from "react-router-dom";
+import DishDetailComponent from "./DishDetailComponent";
 
 //This is a Container Component
 class Main extends Component {
@@ -40,6 +41,17 @@ class Main extends Component {
             );
         }
 
+        const DishWithId = () => {
+            let {dishId} = useParams();
+
+            return(
+                <DishDetailComponent dish={this.state.dishes.filter((dish) => dish.id === parseInt(dishId,10))[0]}
+                                     comments={this.state.comments.filter((comment) => comment.dishId === parseInt(dishId,10))}
+                />
+
+            );
+        }
+
         return (
             //These classNames are defined in the App.css
             <div className="App">
@@ -54,6 +66,10 @@ class Main extends Component {
                     <Route
                         exact path="/menu"
                         element={<Menu dishes={this.state.dishes}/>}
+                    />
+                    <Route
+                        path="/menu/:dishId"
+                        element={<DishWithId/>}
                     />
                     <Route
                         exact path="/contactus"

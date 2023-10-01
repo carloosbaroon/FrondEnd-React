@@ -1,17 +1,17 @@
 import React from "react";
-import {Card, CardImg, CardImgOverlay, CardTitle} from "reactstrap";
+import {Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem} from "reactstrap";
+import {Link} from "react-router-dom";
 
-//This functional component that receives 2 props
-function RenderMenuItem({dish, onClick}) {
+//This functional component that receives 1 props
+function RenderMenuItem({dish}) {
     return (
-        <Card onClick={() => onClick(dish.id)}>
-            {/* You can't do this.state.dish.image = newImage;
-                            This one can only be modified using setState()
-                        */}
-            <CardImg width="100%" src={dish.image} alt={dish.name}/>
-            <CardImgOverlay>
-                <CardTitle>{dish.name}</CardTitle>
-            </CardImgOverlay>
+        <Card>
+            <Link to={`/menu/${dish.id}`}>
+                <CardImg width="100%" src={dish.image} alt={dish.name}/>
+                <CardImgOverlay>
+                    <CardTitle>{dish.name}</CardTitle>
+                </CardImgOverlay>
+            </Link>
         </Card>
     );
 }
@@ -25,13 +25,25 @@ const Menu = (props) => {
             // this means that we MUST always have a KEY
             <div key={dish.id} className="col-12 col-md-5 m-1">
                 {/* Calling RenderMenuItem component defined above with its props */}
-                <RenderMenuItem dish={dish} onClick={props.onClick}/>
+                <RenderMenuItem dish={dish}/>
             </div>
         );
     });
 
     return (
         <div className="container">
+            <div className="row">
+                <Breadcrumb>
+                    <BreadcrumbItem>
+                        <Link to='/home'>Home</Link>
+                    </BreadcrumbItem>
+                    <BreadcrumbItem active>Home</BreadcrumbItem>
+                </Breadcrumb>
+                <div className="col-12">
+                    <h3>Menu</h3>
+                    <hr/>
+                </div>
+            </div>
             <div className="row">{menu}</div>
         </div>
     );
