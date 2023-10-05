@@ -1,9 +1,9 @@
 import Menu from "./MenuComponent";
 import Home from "./HomeComponent";
 import Contact from "./ContactComponent";
-import DishDetail from "./DishDetailComponent";
 import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
+import About from "./AboutComponent";
 import {DISHES} from "../shared/dishes";
 import {COMMENTS} from "../shared/comments";
 import {LEADERS} from "../shared/leaders";
@@ -60,6 +60,10 @@ class Main extends Component {
                     <Route
                         path="/home"
                         element={<HomePage/>}
+                    />
+                    <Route
+                        path="/aboutus"
+                        element={<About leaders={this.state.leaders}/>}
                     />
                     {/* Using props to pass the DISHES to MenuComponent
                     and passing the selected dish */}
